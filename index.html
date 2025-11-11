@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="container-main" class="flex container">
+    <button active="false" type="button" class="w-bold" id="sidebar-open" title="Open menu">
+      <svg viewBox="0 0 488 488" id="burger-menu">
+        <path fill="currentColor" d="M64.192,108.444h359.617c29.943,0,54.223-24.278,54.223-54.222C478.031,24.278,453.754,0,423.809,0H64.192
+                      C34.248,0,9.969,24.278,9.969,54.222C9.969,84.166,34.248,108.444,64.192,108.444z" />
+        <path fill="currentColor" d="M423.809,189.778H64.192c-29.944,0-54.223,24.278-54.223,54.222c0,29.943,24.278,54.223,54.223,54.223h359.617
+                      c29.945,0,54.223-24.279,54.223-54.223C478.031,214.056,453.754,189.778,423.809,189.778z" />
+        <path fill="currentColor" d="M423.809,379.557H64.192c-29.944,0-54.223,24.277-54.223,54.222C9.969,463.722,34.248,488,64.192,488h359.617
+                      c29.945,0,54.223-24.278,54.223-54.222C478.031,403.834,453.754,379.557,423.809,379.557z" />
+      </svg>
+    </button>
+    <aside id="sidebar" class="flex flex-column allign-center hidden">
+      <img alt="sidebar hero banner" src="./content/sidebar-hero.jpg" width="300" height="200">
+      <nav id="sidebar-nav">
+        <ul class="flex flex-column align-stretch space-between">
+          <li><button>Client</button></li>
+          <li><button>About</button></li>
+          <li><button>Contact</button></li>
+        </ul>
+      </nav>
+    </img>
+    </aside>
+    <div id="center-container"  class="container flex flex-column justify-start align-center">
+      <header id="main-header">
+        <div id="header-banner" class="flex flex-column center gap-1">
+          <h2 class="capitalize">Let make something Great</h2>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae, vitae?</p>
+        </div>
+        <div id="header-nav-container" class="flex flex-column justify-center align-center">
+          <h3>Portfolio</h3>
+          <nav id="header-nav">
+            <ul class="flex space-between">
+              <li class="flex-01"><button class="w-auto" section="client">Client</button></li>
+              <li class="flex-01"><button class="w-auto" section="about">About</button></li>
+              <li class="flex-01"><button class="w-auto" section="contact">Contact</button></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+      <main  id="main-content" class="flex flex-column space-between">
+        <div id="clients-items" class="flex wrap center gap-2">
+          <div class="main-card flex flex-column space-between">
+            <div class="main-card-image blank-img"></div>
+            <span class="main-card-text f-text">...</span>
+          </div>
+          <div class="main-card flex flex-column space-between">
+            <div class="main-card-image blank-img"></div>
+            <span class="main-card-text f-text">...</span>
+          </div>
+          <div class="main-card flex flex-column space-between">
+            <div class="main-card-image blank-img"></div>
+            <span class="main-card-text f-text">...</span>
+          </div>
+          <div class="main-card flex flex-column space-between">
+            <div class="main-card-image blank-img"></div>
+            <span class="main-card-text f-text">...</span>
+          </div>
+          <div class="main-card flex flex-column space-between">
+            <div class="main-card-image blank-img"></div>
+            <span class="main-card-text f-text">...</span>
+          </div>
+          <div class="main-card flex flex-column space-between">
+            <div class="main-card-image blank-img"></div>
+            <span class="main-card-text f-text">...</span>
+          </div>
+        </div>
+      </main>
+      <footer id="main-footer">
+        <form id="subscribe-form" class="flex flex-column gap-1">  
+          <h3 class="w-bold uppercase">I want to get fresh updates</h3>
+          <div class="subscribe-row flex flex-column gap-05">
+            <span class="hidden error">Please enter your first name</span>
+            <label class="uppercase" for="subscribe-name">First name:</label>
+            <input type="text" id="subscribe-name" >
+          </div>
+          <div class="subscribe-row flex flex-column gap-05">
+            <span class="hidden error">Please enter a valid email address</span>
+            <label class="uppercase" for="subscribe-email">Email:</label>
+            <input type="email" id="subscribe-email">
+          </div>
+          <div class="subscribe-row flex flex-0 gap-05">
+            <input type="checkbox" id="terms" name="terms">
+            <label for="terms">I consent to the processing of personal data</label>
+            <span class="hidden error">Please consent to the processing of personal data</span>
+          </div>
+          <button id="subscribe-button" type="submit" class="flex-01" onclick="">Subscribe</button>
+        </form>
+        <p>All rights reserved 2023</p>
+      </footer>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

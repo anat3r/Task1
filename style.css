@@ -18,7 +18,7 @@
   font-family: var(--font-family);
 }
 body{
-  overflow: auto;
+  overflow-y: auto;
 }
 h1{
   padding: 0;
@@ -46,7 +46,7 @@ p, li, a, span, div, h4, h5, h6{
 #container-main{
   color: var(--color-dark);
   font-weight: 400;
-  width: 100vw;
+  width: 100%;
 }
 
 
@@ -59,7 +59,6 @@ p, li, a, span, div, h4, h5, h6{
 #main-header{
   width: 100%;
   height: fit-content;
-  overflow: visible;
 }
 
 #main-footer{
@@ -115,8 +114,7 @@ p, li, a, span, div, h4, h5, h6{
 }
 
 #header-nav-container{
-  margin: 16px 0; 
-  overflow: visible;
+  margin: 16px 0 0 0; 
   > *{
     margin: 0 calc(4vw + 24px);
   }

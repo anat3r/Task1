@@ -3,6 +3,7 @@ const sidebarButton = document.getElementById('sidebar-open')
 
 const clientsItems = document.getElementById('clients-items');
 const headerNav = document.getElementById('header-nav');
+const headerNavContainer = document.getElementById('header-nav-container')
 
 
 function showAlert(message) {
@@ -164,11 +165,12 @@ sidebarButton.addEventListener('click', function handleSidebarOpen(event){
   }
 }())
 
+
+
 const observer = new IntersectionObserver(
   (entries) => {
   const entry = entries[0];
-    // Когда верхняя часть nav выходит из viewport
-      if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
+      if (!entry.isIntersecting && entry.boundingClientRect.top <= 0) {
         console.log(entry.target)
         if(entry.target == headerNav){
           document.getElementById('center-container').prepend(headerNav);
@@ -178,8 +180,8 @@ const observer = new IntersectionObserver(
   },
   {
       root: null,
-        threshold: 0,
-          rootMargin: '0px'
+      threshold: 0,
+      rootMargin: '-42px'
   }
 );
 

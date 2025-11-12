@@ -44,7 +44,7 @@ async function selectAbout(event){
   try {
     const response = await fetch('https://fakestoreapi.com/products?limit=6');
     const usersData = await response.json();
-    const pageUsersArr = usersData.slice(0, 6).map(el => [el.title, el.image])
+    const pageUsersArr = usersData.map(el => [el.title, el.image])
     const mainDiv = document.getElementById('main-items')
     mainDiv.innerHTML = ''
     pageUsersArr.forEach((el) => {
@@ -77,7 +77,7 @@ async function selectContact(event) {
     const response = await fetch('https://fakerapi.it/api/v1/texts?_quantity=6&_characters=300');
     const usersData = await response.json();
     const usersArr = usersData.data
-    const pageUsersArr = usersArr.slice(0, 6).map(el => [el.title, el.content, el.author])
+    const pageUsersArr = usersArr.map(el => [el.title, el.content, el.author])
     const mainDiv = document.getElementById('main-items')
     mainDiv.innerHTML = ''
     pageUsersArr.forEach((el) => {

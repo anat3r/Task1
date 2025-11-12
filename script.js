@@ -41,10 +41,10 @@ document.querySelectorAll('button[section="client"]').forEach(el => {
 
 async function selectAbout(event){
   const wait = waitCursor(event.target);
-  const response = await fetch('https://fakestoreapi.com/products?limit=6');
-  const usersData = await response.json();
-  const pageUsersArr = usersData.slice(0, 6).map(el => [el.title, el.image])
   try {
+    const response = await fetch('https://fakestoreapi.com/products?limit=6');
+    const usersData = await response.json();
+    const pageUsersArr = usersData.slice(0, 6).map(el => [el.title, el.image])
     const mainDiv = document.getElementById('main-items')
     mainDiv.innerHTML = ''
     pageUsersArr.forEach((el) => {
@@ -58,7 +58,7 @@ async function selectAbout(event){
     })
   }
   catch (e) {
-    console.log(e)
+    showAlert(e.name + ': ' + e.message)
   }  
   finally{
     setTimeout(() => {
@@ -73,11 +73,11 @@ document.querySelectorAll('button[section="about"]').forEach(el => {
 
 async function selectContact(event) {
   const wait = waitCursor(event.target);
-  const response = await fetch('https://fakerapi.it/api/v1/texts?_quantity=6&_characters=300');
-  const usersData = await response.json();
-  const usersArr = usersData.data
-  const pageUsersArr = usersArr.slice(0, 6).map(el => [el.title, el.content, el.author])
   try {
+    const response = await fetch('https://fakerapi.it/api/v1/texts?_quantity=6&_characters=300');
+    const usersData = await response.json();
+    const usersArr = usersData.data
+    const pageUsersArr = usersArr.slice(0, 6).map(el => [el.title, el.content, el.author])
     const mainDiv = document.getElementById('main-items')
     mainDiv.innerHTML = ''
     pageUsersArr.forEach((el) => {
@@ -92,7 +92,7 @@ async function selectContact(event) {
     })
   }
   catch (e) {
-    console.log(e)
+    showAlert(e.name + ': ' + e.message)
     }
   finally{
     setTimeout(() => {
@@ -113,16 +113,16 @@ function showAlert(message) {
   const wait = waitCursor();
   if (document.querySelector('.alert.hidden[data-message=""]')) {
     //If empty allert exists, do not create another one
-    const existingAlert = document.querySelector('.alert.hidden[data-message=""]');
-    existingAlert.classList.remove('hidden');
-    existingAlert.setAttribute('data-message', message);
-    const maxZIndex = getMaxZIndex();
-    existingAlert.setAttribute('current-z', maxZIndex + 1);
-    existingAlert.style.zIndex = existingAlert.getAttribute('current-z');
     try {
+      const existingAlert = document.querySelector('.alert.hidden[data-message=""]');
+      existingAlert.classList.remove('hidden');
+      existingAlert.setAttribute('data-message', message);
+      const maxZIndex = getMaxZIndex();
+      existingAlert.setAttribute('current-z', maxZIndex + 1);
+      existingAlert.style.zIndex = existingAlert.getAttribute('current-z');
       existingAlert.querySelector('.alert-message').textContent = message;
-    } catch (error) {
-      console.error('Error updating alert message:', error);
+    } catch (e) {
+      showAlert(e.name + ': ' + e.message)
     } finally{
       wait();
     }
@@ -209,9 +209,8 @@ subscribeButton.addEventListener('click', function handleSubcribe(event) {
     name.parentNode.querySelector('.error').classList.add('hidden');
     terms.parentNode.querySelector('.error').classList.add('hidden');
   }
-  catch (error) {
-    console.error('An error occurred during subscription:', error);
-    alert('An unexpected error occurred. Please try again later.');
+  catch (e) {
+    showAlert(e.name + ': ' + e.message)
   }
 });
 

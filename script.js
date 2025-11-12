@@ -5,9 +5,112 @@ const clientsItems = document.getElementById('clients-items');
 const headerNav = document.getElementById('header-nav');
 const headerNavContainer = document.getElementById('header-nav-container')
 
+async function selectClients(event) {
+  const wait = waitCursor(event?.target);
+  try{
+    const response = await fetch('https://rickandmortyapi.com/api/character');
+    const usersData = await response.json();
+    const usersArr = usersData.results
+    const pageUsersArr = usersArr.slice(0, 6).map(el => [el.name, el.image])
+    const mainDiv = document.getElementById('main-items')
+    mainDiv.innerHTML=''
+    pageUsersArr.forEach((el) => {
+      const mainCard = document.createElement('div');
+      mainCard.classList.add('main-card','flex','flex-column','space-between');
+      mainCard.innerHTML = `
+        <img class="main-card-image" src="${el[1]}" width="200" height="200" alt="User icon" />
+        <span class="main-card-text f-text">${el[0]}</span>
+      `
+      mainDiv.append(mainCard)
+    })
+  }
+  catch(e){
+    showAlert(e.name + ': ' +e.message)
+  }
+  finally{
+    setTimeout(() => {
+      wait();
+    })
+  }
+}
+
+selectClients();
+document.querySelectorAll('button[section="client"]').forEach(el => {
+  el.addEventListener('click', selectClients)
+})
+
+async function selectAbout(event){
+  const wait = waitCursor(event.target);
+  const response = await fetch('https://fakestoreapi.com/products?limit=6');
+  const usersData = await response.json();
+  const pageUsersArr = usersData.slice(0, 6).map(el => [el.title, el.image])
+  try {
+    const mainDiv = document.getElementById('main-items')
+    mainDiv.innerHTML = ''
+    pageUsersArr.forEach((el) => {
+      const mainCard = document.createElement('div');
+      mainCard.classList.add('main-card', 'flex', 'flex-column', 'space-between');
+      mainCard.innerHTML = `
+        <img class="main-card-image" src="${el[1]}" width="200" height="200" alt="User icon" />
+        <span class="main-card-text f-text">${el[0]}</span>
+      `
+      mainDiv.append(mainCard)
+    })
+  }
+  catch (e) {
+    console.log(e)
+  }  
+  finally{
+    setTimeout(() => {
+      wait();
+    })
+  }
+}
+
+document.querySelectorAll('button[section="about"]').forEach(el => {
+  el.addEventListener('click', selectAbout)
+})
+
+async function selectContact(event) {
+  const wait = waitCursor(event.target);
+  const response = await fetch('https://fakerapi.it/api/v1/texts?_quantity=6&_characters=300');
+  const usersData = await response.json();
+  const usersArr = usersData.data
+  const pageUsersArr = usersArr.slice(0, 6).map(el => [el.title, el.content, el.author])
+  try {
+    const mainDiv = document.getElementById('main-items')
+    mainDiv.innerHTML = ''
+    pageUsersArr.forEach((el) => {
+      const mainCard = document.createElement('div');
+      mainCard.classList.add('main-card', 'flex', 'flex-column', 'space-between');
+      mainCard.innerHTML = `
+        <p3 class="main-card-text f-title w-bold">${el[0]}</p3>
+        <q class="main-card-text f-text">${el[1]}</q>
+        <adress class="main-card-text f-text">${el[2]}</adress>
+      `
+      mainDiv.append(mainCard)
+    })
+  }
+  catch (e) {
+    console.log(e)
+    }
+  finally{
+    setTimeout(() => {
+      wait();
+  })
+  }
+}
+
+document.querySelectorAll('button[section="contact"]').forEach(el => {
+  el.addEventListener('click', selectContact)
+})
+
+
+
 
 function showAlert(message) {
   //Check for empty allert
+  const wait = waitCursor();
   if (document.querySelector('.alert.hidden[data-message=""]')) {
     //If empty allert exists, do not create another one
     const existingAlert = document.querySelector('.alert.hidden[data-message=""]');
@@ -20,6 +123,8 @@ function showAlert(message) {
       existingAlert.querySelector('.alert-message').textContent = message;
     } catch (error) {
       console.error('Error updating alert message:', error);
+    } finally{
+      wait();
     }
     return;
   }
@@ -42,6 +147,7 @@ function showAlert(message) {
   // Show the alert
   setTimeout(() => {
     alertDiv.classList.remove('hidden');
+    wait();
   });
   // Add event listener to close button
   alertDiv.querySelector('.alert-close').addEventListener('click', () => {
@@ -136,35 +242,16 @@ sidebarButton.addEventListener('click', function handleSidebarOpen(event){
     console.error('An error while opening sidebar', error);
     alert('An unexpected error occurred. Please try again later.');
   }
-}); 
+});
 
-
-
-
-(async function addClients() {
-  const response = await fetch('https://rickandmortyapi.com/api/character');
-  const usersData = await response.json();
-  const usersArr = usersData.results
-  const pageUsersArr = usersArr.slice(0, 6).map(el => [el.name, el.image])
-  console.log(pageUsersArr);
-  try{
-    const clientsDiv = document.getElementById('clients-items')
-    clientsDiv.innerHTML=''
-    pageUsersArr.forEach((el) => {
-      const clientEl = document.createElement('div');
-      clientEl.classList.add('main-card','flex','flex-column','space-between')
-      clientEl.innerHTML = `
-        <img class="main-card-image" src="${el[1]}" width="200" height="200" alt="User icon" />
-        <span class="main-card-text f-text">${el[0]}</span>
-      `
-      clientsDiv.append(clientEl)
-    })
+function waitCursor(eventEl){
+  if (eventEl) eventEl.style.cursor = 'wait';
+  document.body.style.cursor = 'wait';
+  return () => {
+    document.body.style.cursor = '';
+    if (eventEl) eventEl.style.cursor = '';
   }
-  catch(e){
-    console.log(e)
-  }
-}())
-
+}
 
 
 const observer = new IntersectionObserver(
